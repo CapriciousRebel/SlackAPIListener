@@ -30,3 +30,17 @@ def ItIsSlack(request):
 
     # Compare the Signature
     return True if XAppSignature == XSlacksignature else False
+
+
+def ConfigureResponse(response):
+    response.accepted_renderer = JSONRenderer()
+    response.accepted_media_type = "application/json"
+    response.renderer_context = {}
+    return response
+
+
+def Handle(event):
+    if "files" in event:
+        requests.post(
+            "https://slack-api-listener.herokuapp.com/FileHandler/drive_backup",
+            event=event)

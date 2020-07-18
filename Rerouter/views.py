@@ -22,24 +22,22 @@ def rerouter(request):
     if request.method == "GET":
         content = "Hello! Make a POST Requests on this url with auth token from your slack app to access the services."
         response = Response(content)
-        response.accepted_renderer = JSONRenderer()
-        response.accepted_media_type = "application/json"
-        response.renderer_context = {}
-        return response
+        return utils.ConfigureResponse(response)
 
     if request.method == "POST":
-        
         if(utils.ItIsSlack(request)):
-            print("Verified!")
+            # convert request body to a dictionary
+            request_as_a_dict = yaml.safe_load(request.body.decode("utf-8"))
+            # If the request has the event field, handle the event
+            if 'event' in request_as_a_dict:
+                event = request_as_a_dict['event']
+                utils.Handle(event)
+            else:
+                response = Response('Event missing!')
+                return utils.ConfigureResponse(response)
         else:
             response = Response('Fuck Off, stay away from my API!')
-            response.accepted_renderer = JSONRenderer()
-            response.accepted_media_type = "application/json"
-            response.renderer_context = {}
-            return response
+            return utils.ConfigureResponse(response)
 
         response = Response(request)
-        response.accepted_renderer = JSONRenderer()
-        response.accepted_media_type = "application/json"
-        response.renderer_context = {}
-        return response
+        return utils.ConfigureResponse(response)
