@@ -30,6 +30,29 @@ def save_to_tmp(image_url):
 
 # Upload file from /tmp/temp.jpg to google drive
 def upload_to_drive(file_name):
+    print("Making a request to save file in Google Drive . . . . .")
+    headers = {"Authorization": f"Bearer {GOOGLE_DRIVE_BEARER_TOKEN}"}
+    para = {
+        "name": file_name,
+        "parents": [DRIVE_FOLDER_ID]
+    }
+
+    files = {
+        'data': ('metadata', json.dumps(para), 'application/json; charset=UTF-8'),
+        'file': ('image/jpeg', open(TEMP_FILE, "rb"))
+    }
+
+    response = requests.post(
+        "https://www.googleapis.com/upload/drive/v3/files?uploadType=multipart",
+        headers=headers,
+        files=files
+    )
+    print("Response code from Google Drive API: ", response.status_code)
+    return 1
+
+
+
+
     try:
         headers = {"Authorization": f"Bearer {GOOGLE_DRIVE_BEARER_TOKEN}"}
         para = {
