@@ -25,6 +25,8 @@ def drive_backup(request):
 
     if request.method == "GET":
         content = "Hello! Make a POST Request here to store the files to drive from slack."
+        # Env test!
+        content = f"GOOGLE_DRIVE_BEARER_TOKEN = {GOOGLE_DRIVE_BEARER_TOKEN}"
         response = Response(content)
         response.accepted_renderer = JSONRenderer()
         response.accepted_media_type = "application/json"
