@@ -39,12 +39,16 @@ def upload_to_drive(file_name):
 
         para = {
             "name": file_name,
-            "parents": [DRIVE_FOLDER_ID]
+            "parents": [DRIVE_FOLDER_ID,]
         }
 
         print("para set", para)
 
         # Error
+        try: 
+            open(TEMP_FILE, "rb")
+        except:
+            print("Couldn't opne temp file!!!!")
         files = {
             'data': ('metadata', json.dumps(para), 'application/json; charset=UTF-8'),
             'file': ('image/jpeg', open(TEMP_FILE, "rb"))

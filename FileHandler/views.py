@@ -39,6 +39,10 @@ def drive_backup(request):
                     # store each file in /tmp/temp.jpg and then upload to drive
                     for i in range(len(file_as_a_dict['files'])):
                         image_url = file_as_a_dict['files'][i]['url_private_download']
+                        
+                        arr = os.listdir('/tmp/')
+                        print("before save to temp:", arr)
+
                         utils.save_to_tmp(image_url)
 
                         arr = os.listdir('/tmp/')
