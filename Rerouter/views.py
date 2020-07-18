@@ -29,7 +29,7 @@ def rerouter(request):
 
         print(request.headers)
 
-        response = Response(content)
+        response = Response(request)
         response.accepted_renderer = JSONRenderer()
         response.accepted_media_type = "application/json"
         response.renderer_context = {}
