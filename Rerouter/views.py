@@ -11,7 +11,6 @@ import json
 import requests
 import os
 # App imports
-from . import utils
 
 
 @csrf_exempt
