@@ -34,22 +34,25 @@ def upload_to_drive(file_name):
         print("Making a request to save file in Google Drive . . . . .")
 
         headers = {"Authorization": f"Bearer {GOOGLE_DRIVE_BEARER_TOKEN}"}
-        
-        print( "Headers set")
+
+        print("Headers set: ", headers)
 
         para = {
             "name": file_name,
             "parents": [DRIVE_FOLDER_ID]
         }
 
-        print('para set')
+        print("para set", para)
 
+        # Error
         files = {
             'data': ('metadata', json.dumps(para), 'application/json; charset=UTF-8'),
             'file': ('image/jpeg', open(TEMP_FILE, "rb"))
         }
 
-        print("files set. Sending request!")
+        print("files set", files)
+
+        print("Sending Request to drive...")
 
         response = requests.post(
             "https://www.googleapis.com/upload/drive/v3/files?uploadType=multipart",
@@ -59,9 +62,8 @@ def upload_to_drive(file_name):
 
         print("Response code from Google Drive API: ", response.status_code)
 
-    except Exception as e:
+    except:
         print("Failed to upload to drive!!!")
-        logger.error('Error: ' + str(e))
 
 
 # delete file from /tmp/temp.jpg

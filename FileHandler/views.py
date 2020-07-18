@@ -40,7 +40,15 @@ def drive_backup(request):
                     for i in range(len(file_as_a_dict['files'])):
                         image_url = file_as_a_dict['files'][i]['url_private_download']
                         utils.save_to_tmp(image_url)
+
+                        arr = os.listdir('/tmp/')
+                        print("after save to temp:", arr)
+
                         utils.upload_to_drive("Filename")
+
+                        arr = os.listdir('/tmp/')
+                        print("after upload to drive:", arr)
+
                         utils.delete_from_tmp()
         except:
             # Send the request as a response when slack first talk to the API with challenge parameter
