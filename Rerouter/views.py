@@ -28,13 +28,11 @@ def rerouter(request):
 
     if request.method == "POST":
 
-        body = request.get_data()
-
         XSlackRequestTimestamp = request.headers['X-Slack-Request-Timestamp']
-
-        sig_basestring = 'v0:%s:%s' % (timestamp, body.decode('utf-8'))
+        MySignature = 'v0:%s:%s' % (
+            XSlackRequestTimestamp, request.body.decode('utf-8'))
         computed_sha = hmac.new(secret,
-                                sig_basestring.encode('utf-8'),
+                                MySignature.encode('utf-8'),
                                 digestmod=hashlib.sha256).hexdigest()
         my_sig = 'v0=%s' % (computed_sha,)
 
