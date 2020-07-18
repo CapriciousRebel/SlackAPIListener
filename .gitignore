@@ -131,3 +131,7 @@ dmypy.json
 # OS Specific
 .DS_Store
 .vscode
+static
+
+# Heroku config
+.env

@@ -8,8 +8,16 @@ from rest_framework.renderers import JSONRenderer
 import yaml
 import json
 import requests
+import os
 # App imports
 from . import utils
+
+
+# Fetch the config vars
+SLACK_APP_BEARER_TOKEN = os.environ.get('SLACK_APP_BEARER_TOKEN')
+DRIVE_FOLDER_ID = os.environ.get('DRIVE_FOLDER_ID')
+GOOGLE_DRIVE_BEARER_TOKEN = os.environ.get('GOOGLE_DRIVE_BEARER_TOKEN')
+TEMP_FILE = '/tmp/temp.jpg'
 
 
 @csrf_exempt
