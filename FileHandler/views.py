@@ -16,15 +16,6 @@ from . import utils
 
 @csrf_exempt
 def drive_backup(request):
-
-    if request.method == "GET":
-        content = "Hello! Make a POST Request on this url to store the files to drive from slack."
-        response = Response(content)
-        response.accepted_renderer = JSONRenderer()
-        response.accepted_media_type = "application/json"
-        response.renderer_context = {}
-        return response
-
     if request.method == "POST":
         
         print("POST Request made!")
