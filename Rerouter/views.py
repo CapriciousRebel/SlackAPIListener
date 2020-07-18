@@ -37,7 +37,7 @@ def rerouter(request):
         Headers = request.headers
 
         BaseSign = 'v0:%s:%s' % (XSlackRequestTimestamp, Body)
-        ComputedSHA = hmac.new(SLACK_APP_SIGNING_SECRET,
+        ComputedSHA = hmac.new(bytes(SLACK_APP_SIGNING_SECRET, 'utf-8'),
                                BaseSign.encode('utf-8'),
                                digestmod=hashlib.sha256).hexdigest()
 
