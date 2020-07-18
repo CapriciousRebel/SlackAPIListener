@@ -25,7 +25,7 @@ SECRET_KEY = '3+az%jffxs^zo$(00#nl4y8f)322wqpz&3@faw$cc(=1^w!wqf'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['slack-api-listener.herokuapp.com']
 
 
 # Application definition
