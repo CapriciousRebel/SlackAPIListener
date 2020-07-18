@@ -13,24 +13,11 @@ import os
 from . import utils
 
 
-# Fetch the config vars
-SLACK_APP_BEARER_TOKEN = os.environ.get('SLACK_APP_BEARER_TOKEN')
-DRIVE_FOLDER_ID = os.environ.get('DRIVE_FOLDER_ID')
-GOOGLE_DRIVE_BEARER_TOKEN = os.environ.get('GOOGLE_DRIVE_BEARER_TOKEN')
-TEMP_FILE = '/tmp/temp.jpg'
-
-
 @csrf_exempt
 def drive_backup(request):
 
     if request.method == "GET":
-        print("GET Request made!")
-        print(f"GOOGLE_DRIVE_BEARER_TOKEN = {GOOGLE_DRIVE_BEARER_TOKEN}")
-        print(f"DRIVE_FOLDER_ID = {DRIVE_FOLDER_ID}")
-        print(f"SLACK_APP_BEARER_TOKEN = {SLACK_APP_BEARER_TOKEN}")
-
         content = "Hello! Make a POST Request here to store the files to drive from slack."
-        # Env test!
         response = Response(content)
         response.accepted_renderer = JSONRenderer()
         response.accepted_media_type = "application/json"
@@ -38,12 +25,7 @@ def drive_backup(request):
         return response
 
     if request.method == "POST":
-        
         print("POST Request made!")
-        print(f"GOOGLE_DRIVE_BEARER_TOKEN = {GOOGLE_DRIVE_BEARER_TOKEN}")
-        print(f"DRIVE_FOLDER_ID = {DRIVE_FOLDER_ID}")
-        print(f"SLACK_APP_BEARER_TOKEN = {SLACK_APP_BEARER_TOKEN}")
-
         try:
             # convert request body to a dictionary
             request_as_a_dict = yaml.safe_load(request.body.decode("utf-8"))

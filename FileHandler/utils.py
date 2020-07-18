@@ -1,3 +1,5 @@
+# Python imports
+import requests
 import os
 
 
@@ -16,7 +18,6 @@ def save_to_tmp(image_url):
             image_url, headers=headers).content
     except:
         print("Failed to get the file from slack!!!")
-        print(f"Slack URL: {image_url}\n Headers sent :", headers)
         return 0
     try:
         with open(TEMP_FILE, 'wb') as handler:
