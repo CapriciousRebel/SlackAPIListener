@@ -13,9 +13,7 @@ import os
 import hmac
 import hashlib
 # App imports
-
-# Config Vars
-SLACK_APP_SIGNING_SECRET = os.environ.get('SLACK_APP_SIGNING_SECRET')
+from Rerouter import utils
 
 
 @csrf_exempt
@@ -30,21 +28,14 @@ def rerouter(request):
         return response
 
     if request.method == "POST":
-
-        Body = request.body.decode('utf-8')
-        XSlackRequestTimestamp = request.headers['X-Slack-Request-Timestamp']
-        XSlacksignature = request.headers['X-Slack-Signature']
-        Headers = request.headers
-
-        BaseSign = 'v0:%s:%s' % (XSlackRequestTimestamp, Body)
-        ComputedSHA = hmac.new(bytes(SLACK_APP_SIGNING_SECRET, 'utf-8'),
-                               BaseSign.encode('utf-8'),
-                               digestmod=hashlib.sha256).hexdigest()
-
-        XAppSignature = 'v0=%s' % (ComputedSHA,)
-
-        print(XAppSignature)
-        print(XSlacksignature)
+        if(utils.ItIsSlack()):
+            print("Verified!")
+        else:
+            response = Response('Fuck Off, stay away from my API!')
+            response.accepted_renderer = JSONRenderer()
+            response.accepted_media_type = "application/json"
+            response.renderer_context = {}
+            return response
 
         response = Response(request)
         response.accepted_renderer = JSONRenderer()
