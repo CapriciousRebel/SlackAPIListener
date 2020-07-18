@@ -47,8 +47,10 @@ def upload_to_drive(file_name):
             headers=headers,
             files=files
         )
+        print("Uploaded to Drive!")
         return 1
     except:
+        print("Failed to upload to drive!!!")
         return 0
 
 
