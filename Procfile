@@ -1,1 +1,1 @@
-web: gunicorn --chdir SlackAPIListener.wsgi
+web: gunicorn SlackAPIListener.wsgi
