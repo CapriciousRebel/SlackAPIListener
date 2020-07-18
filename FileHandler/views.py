@@ -31,6 +31,7 @@ def drive_backup(request):
 
         content = "Hello! Make a POST Request here to store the files to drive from slack."
         # Env test!
+        response = Response(content)
         response.accepted_renderer = JSONRenderer()
         response.accepted_media_type = "application/json"
         response.renderer_context = {}
