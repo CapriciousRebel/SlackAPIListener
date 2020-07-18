@@ -28,7 +28,8 @@ def rerouter(request):
         return response
 
     if request.method == "POST":
-        if(utils.ItIsSlack()):
+        
+        if(utils.ItIsSlack(request)):
             print("Verified!")
         else:
             response = Response('Fuck Off, stay away from my API!')
